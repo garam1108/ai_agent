@@ -28,6 +28,7 @@
 - `CLAUDE.md` - 프로젝트 지침 (저장소 루트에 유지합니다).
 - `research/` - 자료조사 결과 `.md` 파일 (영문).
 - `report/` - 완성된 보고서 `.docx` 파일.
+- `.claude/.gitkeep`, `.claude/skills/.gitkeep` - GitHub에서 `.claude` > `skills` > `mk-ppt`가 한 줄로 합쳐지지 않고 단계별로 보이게 하는 자리표시 파일.
 - `.claude/skills/mk-ppt/SKILL.md` - python-pptx PPT 스킬 지침.
 - `.claude/skills/mk-ppt/scripts/pptx_helpers.py` - 스킬이 사용하는 헬퍼 함수.
 - `output/` - 생성된 프레젠테이션 `.pptx` 파일과 빌드 스크립트.

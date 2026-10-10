@@ -28,6 +28,7 @@
 - `CLAUDE.md` - project instructions (kept at the repository root).
 - `research/` - research result `.md` files (English).
 - `report/` - finished report `.docx` files.
+- `.claude/.gitkeep`, `.claude/skills/.gitkeep` - placeholder files so GitHub shows `.claude` > `skills` > `mk-ppt` as separate levels instead of one collapsed path.
 - `.claude/skills/mk-ppt/SKILL.md` - python-pptx PPT skill instructions.
 - `.claude/skills/mk-ppt/scripts/pptx_helpers.py` - helper functions used by the skill.
 - `output/` - generated presentation `.pptx` files and their build scripts.
