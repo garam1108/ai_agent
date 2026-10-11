@@ -31,6 +31,8 @@
 - `.claude/.gitkeep`, `.claude/skills/.gitkeep` - GitHub에서 `.claude` > `skills` > `mk-ppt`가 한 줄로 합쳐지지 않고 단계별로 보이게 하는 자리표시 파일.
 - `.claude/skills/mk-ppt/SKILL.md` - python-pptx PPT 스킬 지침.
 - `.claude/skills/mk-ppt/scripts/pptx_helpers.py` - 스킬이 사용하는 헬퍼 함수.
+- `.claude/rules/ppt-rule-v1.md` - PPT 파일 제작 시 따를 규칙 (슬라이드 장수, 디자인 참고, 레이아웃 품질).
+- `references/ppt/slide-design/system.md` - 템플릿 이미지를 기반으로 한 슬라이드 디자인 참고 문서 (색상, 폰트, 레이아웃).
 - `output/` - 생성된 프레젠테이션 `.pptx` 파일과 빌드 스크립트.
 - `translate/` - 모든 `.md` 파일의 한글 번역본 (`<원본 이름>.ko.md`).
 - 기존 파일은 덮어쓰지 않고 새 파일명으로 생성합니다 (예: `_v2` 접미사 추가).

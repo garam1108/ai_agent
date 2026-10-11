@@ -6,12 +6,18 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 
-ORANGE = RGBColor(0xE8, 0x6A, 0x10)
-ORANGE_LIGHT = RGBColor(0xFD, 0xEB, 0xDA)
+# 테마 팔레트 (THEME 값으로 선택)
+THEMES = {
+    "orange": {"accent": RGBColor(0xE8, 0x6A, 0x10), "light": RGBColor(0xFD, 0xEB, 0xDA)},
+    "pink": {"accent": RGBColor(0xE9, 0x4B, 0x8B), "light": RGBColor(0xFD, 0xE4, 0xEF)},
+}
+THEME = "pink"
+ACCENT = THEMES[THEME]["accent"]
+ACCENT_LIGHT = THEMES[THEME]["light"]
 DARK = RGBColor(0x2B, 0x2B, 0x2B)
 GRAY = RGBColor(0x6B, 0x6B, 0x6B)
 WHITE = RGBColor(255, 255, 255)
-FONT = "맑은 고딕"
+FONT = "Noto Sans KR"
 
 prs = Presentation()
 prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
@@ -38,26 +44,26 @@ def text(s, x, y, w, h, t, size=18, color=DARK, bold=False, align=PP_ALIGN.LEFT,
 
 def base(title, n, notes):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    rect(s, 0, 0, 0.25, H, ORANGE)
+    rect(s, 0, 0, 0.25, H, ACCENT)
     text(s, 0.8, 0.45, 11.5, 0.9, title, 34, DARK, True, anchor=MSO_ANCHOR.MIDDLE)
-    rect(s, 0.85, 1.35, 1.2, 0.06, ORANGE)
+    rect(s, 0.85, 1.35, 1.2, 0.06, ACCENT)
     text(s, 12.0, 6.95, 1.0, 0.4, str(n), 12, GRAY, align=PP_ALIGN.RIGHT)
     s.notes_slide.notes_text_frame.text = notes
     return s
 
 def card(s, x, y, w, h, head, body):
-    rect(s, x, y, w, h, ORANGE_LIGHT, MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.06
-    rect(s, x, y, 0.09, h, ORANGE)
-    text(s, x + 0.3, y + 0.2, w - 0.5, 0.6, head, 22, ORANGE, True)
+    rect(s, x, y, w, h, ACCENT_LIGHT, MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.06
+    rect(s, x, y, 0.09, h, ACCENT)
+    text(s, x + 0.3, y + 0.2, w - 0.5, 0.6, head, 22, ACCENT, True)
     text(s, x + 0.3, y + 0.9, w - 0.5, h - 1.0, body, 18, DARK)
 
 # 1. 표지
 s = prs.slides.add_slide(prs.slide_layouts[6])
-rect(s, 0, 0, W, H, ORANGE)
+rect(s, 0, 0, W, H, ACCENT)
 rect(s, 0.9, 3.55, 1.6, 0.08, WHITE)
 text(s, 0.9, 1.8, 11, 1.6, "Anthropic & Claude", 54, WHITE, True, anchor=MSO_ANCHOR.BOTTOM)
 text(s, 0.9, 3.85, 11, 1.0, "안전하고 유용한 AI를 만드는 회사 소개", 28, WHITE)
-text(s, 0.9, 6.3, 11, 0.5, "회사 소개 발표자료", 16, ORANGE_LIGHT)
+text(s, 0.9, 6.3, 11, 0.5, "회사 소개 발표자료", 16, ACCENT_LIGHT)
 s.notes_slide.notes_text_frame.text = "Claude를 만든 Anthropic이 어떤 회사인지 소개합니다."
 
 # 2. 회사 개요
@@ -79,17 +85,17 @@ items = [("Constitutional AI", "원칙(헌법)에 기반해 모델이 스스로 
          ("해석가능성 연구", "모델 내부 동작을 이해해 신뢰성을 높이는 연구")]
 for i, (h, b) in enumerate(items):
     y = 1.9 + i * 1.5
-    c = rect(s, 0.85, y, 0.9, 0.9, ORANGE, MSO_SHAPE.OVAL)
+    c = rect(s, 0.85, y, 0.9, 0.9, ACCENT, MSO_SHAPE.OVAL)
     c.text_frame.text = str(i + 1)
     r = c.text_frame.paragraphs[0].runs[0]
     r.font.size = Pt(28); r.font.bold = True; r.font.color.rgb = WHITE; r.font.name = FONT
     c.text_frame.paragraphs[0].alignment = PP_ALIGN.CENTER
-    text(s, 2.0, y - 0.05, 10.5, 0.5, h, 24, ORANGE, True)
+    text(s, 2.0, y - 0.05, 10.5, 0.5, h, 24, ACCENT, True)
     text(s, 2.0, y + 0.5, 10.5, 0.5, b, 18, DARK)
 
 # 5. 마무리
 s = base("정리", 5, "핵심 메시지를 요약하며 마무리합니다.")
-rect(s, 0.85, 1.9, 11.7, 1.7, ORANGE, MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.1
+rect(s, 0.85, 1.9, 11.7, 1.7, ACCENT, MSO_SHAPE.ROUNDED_RECTANGLE).adjustments[0] = 0.1
 text(s, 1.2, 1.9, 11.0, 1.7, "안전을 최우선으로, 유용한 AI를 만든다", 32, WHITE, True, PP_ALIGN.CENTER, MSO_ANCHOR.MIDDLE)
 text(s, 0.85, 4.0, 11.7, 2.4, [
     "•  Anthropic: 2021년 설립된 AI 안전 중심의 공익법인",
@@ -97,4 +103,4 @@ text(s, 0.85, 4.0, 11.7, 2.4, [
     "•  안전 연구와 제품 개발을 함께 추진", 
     "감사합니다"], 20, DARK)
 
-prs.save("output/claude_company_intro.pptx")
+prs.save("output/claude_company_intro_pink.pptx")

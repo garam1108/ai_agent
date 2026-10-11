@@ -10,16 +10,18 @@ python-pptx has no rendering engine, so the default flow is "write code -> run i
 
 ## 0. Preparation
 
-1. Check installation: `python -c "import pptx; print(pptx.__version__)"` (if missing, `pip install python-pptx`)
-2. Output location: unless the user specifies one, save to the `output/` folder at the project root. Create it if absent.
-3. When modifying an existing file, do not overwrite the original; save under a new name (`_v2`, etc.), because the operation is irreversible.
-4. For recurring operations (deleting/duplicating/reordering slides, adding tables/charts, dumping structure), import `scripts/pptx_helpers.py`. It provides already-verified code for features missing from the official python-pptx API.
+1. **First of all**, read `.claude/rules/ppt-rule-v1.md` and follow it (default slide count, design reference, layout quality). It takes priority over the other steps in this skill. The rule file is also auto-loaded every session (no path scope), but read it explicitly anyway.
+2. Check installation: `python -c "import pptx; print(pptx.__version__)"` (if missing, `pip install python-pptx`)
+3. Output location: unless the user specifies one, save to the `output/` folder at the project root. Create it if absent.
+4. When modifying an existing file, do not overwrite the original; save under a new name (`_v2`, etc.), because the operation is irreversible.
+5. For recurring operations (deleting/duplicating/reordering slides, adding tables/charts, dumping structure), import `scripts/pptx_helpers.py`. It provides already-verified code for features missing from the official python-pptx API.
 
 ```python
 import sys
 sys.path.insert(0, ".claude/skills/mk-ppt/scripts")
 from pptx_helpers import *
 ```
+
 
 ## 1. Workflow
 
@@ -65,7 +67,7 @@ r.hyperlink.address = "https://example.com"
 tf.paragraphs[0].alignment = PP_ALIGN.CENTER
 tf.vertical_anchor = MSO_ANCHOR.MIDDLE
 ```
-Specify Korean fonts explicitly, e.g. `r.font.name = "맑은 고딕"`. Without it, fonts may break depending on the environment.
+Specify Korean fonts explicitly, e.g. `r.font.name = "Noto Sans KR"` (the default, `DEFAULT_FONT` in the helpers). Without it, fonts may break depending on the environment.
 
 ### Shapes / lines / groups
 ```python

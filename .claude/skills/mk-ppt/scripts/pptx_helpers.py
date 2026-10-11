@@ -12,9 +12,38 @@ from pptx.enum.chart import XL_CHART_TYPE
 from pptx.util import Pt
 
 __all__ = [
+    "THEMES", "DEFAULT_FONT", "set_theme", "get_theme",
     "delete_slide", "move_slide", "duplicate_slide",
     "add_table", "add_chart", "dump_presentation", "extract_text",
 ]
+
+DEFAULT_FONT = "Noto Sans KR"
+
+# 테마 팔레트: primary(강조/헤더), light(카드 배경), dark(본문), gray(보조), white
+THEMES = {
+    "navy": {"primary": RGBColor(0x1F, 0x3A, 0x5F), "light": RGBColor(0xE3, 0xEA, 0xF3)},
+    "orange": {"primary": RGBColor(0xE8, 0x6A, 0x10), "light": RGBColor(0xFD, 0xEB, 0xDA)},
+    "pink": {"primary": RGBColor(0xE9, 0x4B, 0x8B), "light": RGBColor(0xFD, 0xE4, 0xEF)},
+}
+for _t in THEMES.values():
+    _t.update(dark=RGBColor(0x2B, 0x2B, 0x2B), gray=RGBColor(0x6B, 0x6B, 0x6B),
+              white=RGBColor(255, 255, 255))
+
+_theme_name = "pink"
+
+
+def set_theme(name):
+    """현재 테마를 바꾼다(navy/orange/pink). add_table 등이 이 테마를 따른다."""
+    global _theme_name
+    if name not in THEMES:
+        raise ValueError(f"알 수 없는 테마: {name} (선택: {', '.join(THEMES)})")
+    _theme_name = name
+
+
+def get_theme():
+    """현재 테마의 색상 딕셔너리를 반환한다."""
+    return THEMES[_theme_name]
+
 
 CHART_KINDS = {
     "column": XL_CHART_TYPE.COLUMN_CLUSTERED,
@@ -62,8 +91,13 @@ def duplicate_slide(prs, index):
 
 
 def add_table(slide, rows, left, top, width, height, header=True,
-              font_size=14, header_fill=RGBColor(0x1F, 0x3A, 0x5F)):
-    """2차원 리스트로 표를 만든다. header=True면 첫 행을 헤더 색으로 칠한다."""
+              font_size=14, header_fill=None, font_name=None):
+    """2차원 리스트로 표를 만든다. header=True면 첫 행을 헤더 색으로 칠한다.
+
+    header_fill 기본값은 현재 테마의 primary, font_name 기본값은 DEFAULT_FONT.
+    """
+    header_fill = header_fill or get_theme()["primary"]
+    font_name = font_name or DEFAULT_FONT
     n_rows, n_cols = len(rows), max(len(r) for r in rows)
     table = slide.shapes.add_table(n_rows, n_cols, left, top, width, height).table
     for r, row in enumerate(rows):
@@ -73,6 +107,7 @@ def add_table(slide, rows, left, top, width, height, header=True,
             for p in cell.text_frame.paragraphs:
                 for run in p.runs:
                     run.font.size = Pt(font_size)
+                    run.font.name = font_name
                     if header and r == 0:
                         run.font.bold = True
                         run.font.color.rgb = RGBColor(255, 255, 255)
@@ -95,6 +130,7 @@ def add_chart(slide, kind, categories, series, left, top, width, height,
         data.add_series(name, list(values))
     graphic = slide.shapes.add_chart(CHART_KINDS[kind], left, top, width, height, data)
     chart = graphic.chart
+    chart.font.name = DEFAULT_FONT
     if title:
         chart.has_title = True
         chart.chart_title.text_frame.text = title

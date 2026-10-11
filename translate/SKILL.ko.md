@@ -10,16 +10,18 @@ python-pptx는 렌더링 엔진이 없으므로, "코드를 쓰고 → 실행하
 
 ## 0. 작업 전 준비
 
-1. 설치 확인: `python -c "import pptx; print(pptx.__version__)"` (미설치 시 `pip install python-pptx`)
-2. 산출물 위치: 사용자가 지정하지 않으면 프로젝트 루트의 `output/` 폴더에 저장한다. 폴더가 없으면 만든다.
-3. 기존 파일을 수정할 때는 원본을 덮어쓰지 말고 새 이름(`_v2` 등)으로 저장한다. 되돌릴 수 없는 작업이기 때문이다.
-4. 반복되는 작업(슬라이드 삭제·복제·순서 변경, 표·차트 추가, 구조 덤프)은 `scripts/pptx_helpers.py`를 import해서 쓴다. python-pptx 공식 API에 없는 기능을 이미 검증된 코드로 제공하기 때문이다.
+1. **무엇보다 먼저** `.claude/rules/ppt-rule-v1.md`를 읽고 따른다 (기본 슬라이드 수, 디자인 참고, 레이아웃 품질). 이 스킬의 다른 단계보다 우선한다. 규칙 파일은 경로 제한 없이 매 세션 자동 로드되지만, 그래도 명시적으로 읽는다.
+2. 설치 확인: `python -c "import pptx; print(pptx.__version__)"` (미설치 시 `pip install python-pptx`)
+3. 산출물 위치: 사용자가 지정하지 않으면 프로젝트 루트의 `output/` 폴더에 저장한다. 폴더가 없으면 만든다.
+4. 기존 파일을 수정할 때는 원본을 덮어쓰지 말고 새 이름(`_v2` 등)으로 저장한다. 되돌릴 수 없는 작업이기 때문이다.
+5. 반복되는 작업(슬라이드 삭제·복제·순서 변경, 표·차트 추가, 구조 덤프)은 `scripts/pptx_helpers.py`를 import해서 쓴다. python-pptx 공식 API에 없는 기능을 이미 검증된 코드로 제공하기 때문이다.
 
 ```python
 import sys
 sys.path.insert(0, ".claude/skills/mk-ppt/scripts")
 from pptx_helpers import *
 ```
+
 
 ## 1. 작업 절차
 
@@ -65,7 +67,7 @@ r.hyperlink.address = "https://example.com"
 tf.paragraphs[0].alignment = PP_ALIGN.CENTER
 tf.vertical_anchor = MSO_ANCHOR.MIDDLE
 ```
-한글 글꼴은 `r.font.name = "맑은 고딕"`처럼 명시한다. 지정하지 않으면 환경에 따라 글꼴이 깨질 수 있다.
+한글 글꼴은 `r.font.name = "Noto Sans KR"`처럼 명시한다(헬퍼의 기본값 `DEFAULT_FONT`). 지정하지 않으면 환경에 따라 글꼴이 깨질 수 있다.
 
 ### 도형 / 선 / 그룹
 ```python
