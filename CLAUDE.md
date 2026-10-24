@@ -34,5 +34,9 @@
 - `.claude/rules/ppt-rule-v1.md` - rules to follow when creating PPT files (slide count, design reference, layout quality).
 - `references/ppt/slide-design/system.md` - slide design reference (colors, fonts, layout) based on the template image.
 - `output/` - generated presentation `.pptx` files and their build scripts.
+- `.mcp.json` - project-scoped MCP server registration (`gstarcad`).
+- `mcp-servers/gstarcad/server.py` - GstarCAD 2023 MCP server (COM automation via pywin32).
+- `mcp-servers/gstarcad/requirements.txt` - Python dependencies of the MCP server (`mcp<2`, `pywin32`).
+- `mcp-servers/gstarcad/README.md` - usage and tool list of the GstarCAD MCP server.
 - `translate/` - Korean translations (`<original name>.ko.md`) of every `.md` file.
 - Never overwrite existing files; create a new file name instead (e.g. add a `_v2` suffix).

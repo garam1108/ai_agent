@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gstarcad": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "C:\\Users\\ICT-Garam\\Desktop\\agent1004\\ai_agent\\mcp-servers\\gstarcad\\server.py"
+      ],
+      "env": {}
+    }
+  }
+}
