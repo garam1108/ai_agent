@@ -37,6 +37,7 @@
 - `references/ppt/slide-design/system.md` - slide design reference (colors, fonts, layout) based on the template image.
 - `output/` - generated presentation `.pptx` files and their build scripts, and exported card news `.png` images.
 - `output/blog/` - Naver Blog manuscripts (`.md`) written by the blog agent.
+- `output/blog/images/` - free (Unsplash) images used in the Naver Blog manuscripts.
 - `.mcp.json` - project-scoped MCP server registration (`gstarcad`, `higgsfield`, `figma`).
 - `mcp-servers/gstarcad/server.py` - GstarCAD 2023 MCP server (COM automation via pywin32).
 - `mcp-servers/gstarcad/requirements.txt` - Python dependencies of the MCP server (`mcp<2`, `pywin32`).

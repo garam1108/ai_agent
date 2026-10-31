@@ -37,6 +37,7 @@
 - `references/ppt/slide-design/system.md` - 템플릿 이미지를 기반으로 한 슬라이드 디자인 참고 문서 (색상, 폰트, 레이아웃).
 - `output/` - 생성된 프레젠테이션 `.pptx` 파일과 빌드 스크립트, 내보낸 카드뉴스 `.png` 이미지.
 - `output/blog/` - 블로그 에이전트가 작성한 네이버 블로그 원고(`.md`).
+- `output/blog/images/` - 네이버 블로그 원고에 사용한 무료(Unsplash) 이미지.
 - `.mcp.json` - 프로젝트 범위 MCP 서버 등록 파일 (`gstarcad`, `higgsfield`, `figma`).
 - `mcp-servers/gstarcad/server.py` - 지스타캐드 2023 MCP 서버 (pywin32 기반 COM 자동화).
 - `mcp-servers/gstarcad/requirements.txt` - MCP 서버의 Python 의존성 (`mcp<2`, `pywin32`).
