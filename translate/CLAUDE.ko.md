@@ -16,8 +16,7 @@
 
 ## 마크다운 파일 규칙
 
-- 모든 `.md` 파일은 영어로 작성합니다.
-- 작성한 모든 `.md` 파일의 한글 번역본을 `C:\Users\ICT-Garam\Desktop\agent1004\ai_agent\translate`에 `<원본 이름>.ko.md` 형식으로 저장합니다 (예: `CLAUDE.md` -> `translate/CLAUDE.ko.md`).
+- 모든 `.md` 파일은 영어로 작성합니다.- 작성한 모든 `.md` 파일의 한글 번역본을 `translate/`(프로젝트 루트)에 `<원본 이름>.ko.md` 형식으로 저장합니다 (예: `CLAUDE.md` -> `translate/CLAUDE.ko.md`).
 - 번역본을 항상 원본과 동기화합니다.
   - `.md` 파일이 수정되면 변경된 부분을 확인하고 같은 내용을 번역본에도 반영합니다.
   - `.md` 파일이 삭제되면 해당 번역본도 함께 삭제합니다.
@@ -28,13 +27,17 @@
 - `CLAUDE.md` - 프로젝트 지침 (저장소 루트에 유지합니다).
 - `research/` - 자료조사 결과 `.md` 파일 (영문).
 - `report/` - 완성된 보고서 `.docx` 파일.
-- `.claude/.gitkeep`, `.claude/skills/.gitkeep` - GitHub에서 `.claude` > `skills` > `mk-ppt`가 한 줄로 합쳐지지 않고 단계별로 보이게 하는 자리표시 파일.
+- `.claude/skills/.gitkeep` - GitHub에서 `skills` > `mk-ppt`가 한 줄로 합쳐지지 않고 단계별로 보이게 하는 자리표시 파일.
 - `.claude/skills/mk-ppt/SKILL.md` - python-pptx PPT 스킬 지침.
 - `.claude/skills/mk-ppt/scripts/pptx_helpers.py` - 스킬이 사용하는 헬퍼 함수.
 - `.claude/rules/ppt-rule-v1.md` - PPT 파일 제작 시 따를 규칙 (슬라이드 장수, 디자인 참고, 레이아웃 품질).
+- `.claude/rules/browser-control-rule-v1.md` - Playwright MCP 호출 시점 규칙 (키워드가 있으면 자동 호출, 없으면 먼저 동의를 구함).
+- `.claude/agents/research-agent.md` - 웹에서 주제를 조사하고 결과를 `research/`에 저장하는 서브 에이전트.
+- `.claude/agents/blog-agent.md` - 네이버 블로그 글을 작성하는 서브 에이전트 (원고는 `output/blog/`에 저장, Playwright MCP로 입력, 임시저장 상태로 마무리, 매 실행마다 로그인 확인).
 - `references/ppt/slide-design/system.md` - 템플릿 이미지를 기반으로 한 슬라이드 디자인 참고 문서 (색상, 폰트, 레이아웃).
-- `output/` - 생성된 프레젠테이션 `.pptx` 파일과 빌드 스크립트.
-- `.mcp.json` - 프로젝트 범위 MCP 서버 등록 파일 (`gstarcad`).
+- `output/` - 생성된 프레젠테이션 `.pptx` 파일과 빌드 스크립트, 내보낸 카드뉴스 `.png` 이미지.
+- `output/blog/` - 블로그 에이전트가 작성한 네이버 블로그 원고(`.md`).
+- `.mcp.json` - 프로젝트 범위 MCP 서버 등록 파일 (`gstarcad`, `higgsfield`, `figma`).
 - `mcp-servers/gstarcad/server.py` - 지스타캐드 2023 MCP 서버 (pywin32 기반 COM 자동화).
 - `mcp-servers/gstarcad/requirements.txt` - MCP 서버의 Python 의존성 (`mcp<2`, `pywin32`).
 - `mcp-servers/gstarcad/README.md` - 지스타캐드 MCP 서버의 사용법과 도구 목록.

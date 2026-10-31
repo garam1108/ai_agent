@@ -16,8 +16,7 @@
 
 ## Markdown file rules
 
-- Write every `.md` file in English.
-- For every `.md` file written, save a Korean translation in `C:\Users\ICT-Garam\Desktop\agent1004\ai_agent\translate`, named `<original name>.ko.md` (e.g. `CLAUDE.md` -> `translate/CLAUDE.ko.md`).
+- Write every `.md` file in English.- For every `.md` file written, save a Korean translation in `translate/` (project root), named `<original name>.ko.md` (e.g. `CLAUDE.md` -> `translate/CLAUDE.ko.md`).
 - Keep translations in sync:
   - Whenever an `.md` file is modified, check what changed and apply the same changes to its translation.
   - Whenever an `.md` file is deleted, delete its translation as well.
@@ -28,13 +27,17 @@
 - `CLAUDE.md` - project instructions (kept at the repository root).
 - `research/` - research result `.md` files (English).
 - `report/` - finished report `.docx` files.
-- `.claude/.gitkeep`, `.claude/skills/.gitkeep` - placeholder files so GitHub shows `.claude` > `skills` > `mk-ppt` as separate levels instead of one collapsed path.
+- `.claude/skills/.gitkeep` - placeholder file so GitHub shows `skills` > `mk-ppt` as separate levels instead of one collapsed path.
 - `.claude/skills/mk-ppt/SKILL.md` - python-pptx PPT skill instructions.
 - `.claude/skills/mk-ppt/scripts/pptx_helpers.py` - helper functions used by the skill.
 - `.claude/rules/ppt-rule-v1.md` - rules to follow when creating PPT files (slide count, design reference, layout quality).
+- `.claude/rules/browser-control-rule-v1.md` - rules for when to call the Playwright MCP (keyword trigger = automatic, otherwise ask consent first).
+- `.claude/agents/research-agent.md` - sub agent that researches a topic on the web and saves the result to `research/`.
+- `.claude/agents/blog-agent.md` - sub agent that writes a Naver Blog post (manuscript in `output/blog/`, typed with the Playwright MCP, saved as a temporary draft, login checked every run).
 - `references/ppt/slide-design/system.md` - slide design reference (colors, fonts, layout) based on the template image.
-- `output/` - generated presentation `.pptx` files and their build scripts.
-- `.mcp.json` - project-scoped MCP server registration (`gstarcad`).
+- `output/` - generated presentation `.pptx` files and their build scripts, and exported card news `.png` images.
+- `output/blog/` - Naver Blog manuscripts (`.md`) written by the blog agent.
+- `.mcp.json` - project-scoped MCP server registration (`gstarcad`, `higgsfield`, `figma`).
 - `mcp-servers/gstarcad/server.py` - GstarCAD 2023 MCP server (COM automation via pywin32).
 - `mcp-servers/gstarcad/requirements.txt` - Python dependencies of the MCP server (`mcp<2`, `pywin32`).
 - `mcp-servers/gstarcad/README.md` - usage and tool list of the GstarCAD MCP server.
